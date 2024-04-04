@@ -54,7 +54,7 @@ func Setup(logPath string, level int) {
 		logLevel,
 	)
 
-	logger := zap.New(core, zap.AddCaller(), zap.AddStacktrace(zap.ErrorLevel), zap.AddCallerSkip(1))
+	logger := zap.New(core, zap.AddCaller(), zap.AddCallerSkip(1))
 
 	sugarLogger = logger.Sugar()
 
