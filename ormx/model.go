@@ -11,10 +11,10 @@ import (
 type OrmType string
 
 const (
-	MySQL OrmType = "mysql"
+	MySQLType OrmType = "mysql"
 )
 
-type ormxConfig struct {
+type OrmxConfig struct {
 	Type        OrmType
 	User        string
 	Password    string
@@ -26,7 +26,7 @@ type ormxConfig struct {
 	LogMode     string
 }
 
-func Setup(config *ormxConfig) (db *gorm.DB, err error) {
+func Setup(config *OrmxConfig) (db *gorm.DB, err error) {
 	var ormLogger logger.Interface
 
 	if config.LogMode == "debug" {
@@ -51,7 +51,7 @@ func Setup(config *ormxConfig) (db *gorm.DB, err error) {
 			return nil, fmt.Errorf("gorm open db conncection fail, err: %w", err)
 		}
 	default:
-		return nil, fmt.Errorf("unknown database type: %w", config.Type)
+		return nil, fmt.Errorf("unknown database type: %s", config.Type)
 	}
 
 	sqlDB, err := db.DB()
