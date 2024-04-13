@@ -58,11 +58,11 @@ func (g *Gin) RespBadRequest(code int) {
 }
 
 func (g *Gin) RespUnAuth() {
-	g.respond(StatusUnAuth, 401, "", nil)
+	g.respond(StatusUnAuth, 401, "not authorized", nil)
 }
 
 func (g *Gin) RespForbidden() {
-	g.respond(StatusForbidden, 403, "", nil)
+	g.respond(StatusForbidden, 403, "forbidden", nil)
 }
 
 func (g *Gin) RespError(code int) {
