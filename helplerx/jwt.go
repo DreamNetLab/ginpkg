@@ -14,7 +14,7 @@ type Claims struct {
 type JwtPayload struct {
 	UserName string
 	UserID   int64
-	Secret   string
+	Secret   []byte
 
 	Issuer  string
 	Subject string
