@@ -54,17 +54,17 @@ func (g *Gin) RespInvalidParams(errors any) {
 }
 
 func (g *Gin) RespBadRequest(code int) {
-	g.respond(StatusBadRequest, code, "", nil)
+	g.respond(StatusBadRequest, code, "", map[string]any{})
 }
 
 func (g *Gin) RespUnAuth() {
-	g.respond(StatusUnAuth, 401, "not authorized", nil)
+	g.respond(StatusUnAuth, 401, "not authorized", map[string]any{})
 }
 
 func (g *Gin) RespForbidden() {
-	g.respond(StatusForbidden, 403, "forbidden", nil)
+	g.respond(StatusForbidden, 403, "forbidden", map[string]any{})
 }
 
 func (g *Gin) RespError(code int) {
-	g.respond(StatusInternalError, code, "", nil)
+	g.respond(StatusInternalError, code, "", map[string]any{})
 }
