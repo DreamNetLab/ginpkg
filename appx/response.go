@@ -6,12 +6,14 @@ const (
 	StatusSuccess       = http.StatusOK
 	StatusBadRequest    = http.StatusBadRequest
 	StatusUnAuth        = http.StatusUnauthorized
+	StatusForbidden     = http.StatusForbidden
 	StatusInternalError = http.StatusInternalServerError
 )
 
 var defaultErrMsg = map[int]string{
 	400: "invalid params",
 	401: "not authorized",
+	403: "forbidden",
 	500: "internal error",
 }
 
@@ -57,6 +59,10 @@ func (g *Gin) RespBadRequest(code int) {
 
 func (g *Gin) RespUnAuth() {
 	g.respond(StatusUnAuth, 401, "", nil)
+}
+
+func (g *Gin) RespForbidden() {
+	g.respond(StatusForbidden, 403, "", nil)
 }
 
 func (g *Gin) RespError(code int) {
