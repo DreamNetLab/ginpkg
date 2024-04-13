@@ -5,6 +5,7 @@ import "net/http"
 const (
 	StatusSuccess       = http.StatusOK
 	StatusBadRequest    = http.StatusBadRequest
+	StatusUnAuth        = http.StatusUnauthorized
 	StatusInternalError = http.StatusInternalServerError
 )
 
