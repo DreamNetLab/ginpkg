@@ -17,6 +17,8 @@ func (dec DefaultErrorCoder) GetMsg(code int) string {
 	switch code {
 	case 400:
 		return "Bad Request"
+	case 401:
+		return "Not Authorized"
 	case 500:
 		return "Internal Server Error"
 	default:

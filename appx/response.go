@@ -11,6 +11,7 @@ const (
 
 var defaultErrMsg = map[int]string{
 	400: "invalid params",
+	401: "not authorized",
 	500: "internal error",
 }
 
@@ -52,6 +53,10 @@ func (g *Gin) RespInvalidParams(errors any) {
 
 func (g *Gin) RespBadRequest(code int) {
 	g.respond(StatusBadRequest, code, "", nil)
+}
+
+func (g *Gin) RespUnAuth() {
+	g.respond(StatusUnAuth, 401, "", nil)
 }
 
 func (g *Gin) RespError(code int) {
