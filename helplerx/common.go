@@ -5,14 +5,13 @@ import (
 )
 
 func GetRealIP(ctx *gin.Context) string {
-	ip := ctx.Request.Header.Get("X-Real-IP")
+	ip := ctx.RemoteIP()
 
+	if ip == "" {
+		ip = ctx.Request.Header.Get("X-Real-IP")
+	}
 	if ip == "" {
 		ip = ctx.Request.Header.Get("X-Forwarded-For")
-	}
-
-	if ip == "" {
-		ip = ctx.Request.RemoteAddr
 	}
 
 	return ip

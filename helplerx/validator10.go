@@ -111,3 +111,17 @@ func ErrorsInParams(ctx *gin.Context, instance any) map[string]string {
 
 	return nil
 }
+
+// ErrorsInJSON 绑定json参数
+func ErrorsInJSON(ctx *gin.Context, instance any) map[string]string {
+	if err := ctx.ShouldBindJSON(instance); err != nil {
+		var errs validator.ValidationErrors
+		if ok := errors.As(err, &errs); !ok {
+			return nil
+		}
+
+		return removeTopStruct(errs.Translate(Trans))
+	}
+
+	return nil
+}
