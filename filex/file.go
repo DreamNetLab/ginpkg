@@ -3,10 +3,22 @@ package filex
 import (
 	"errors"
 	"fmt"
+	"io"
 	"io/fs"
 	"os"
+	"path"
 	"path/filepath"
 )
+
+func GetSize(f io.Reader) (int, error) {
+	content, err := io.ReadAll(f)
+
+	return len(content), err
+}
+
+func GetExt(file string) string {
+	return path.Ext(file)
+}
 
 func CheckNotExist(src string) bool {
 	_, err := os.Stat(src)
@@ -67,4 +79,8 @@ func MustOpen(fileName, filePath string) (*os.File, error) {
 	}
 
 	return f, nil
+}
+
+func Delete(src string) error {
+	return os.Remove(src)
 }
