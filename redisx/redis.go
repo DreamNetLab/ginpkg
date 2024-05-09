@@ -105,3 +105,39 @@ func (rc *RedisxClient) Delete(key string) error {
 
 	return nil
 }
+
+func (rc *RedisxClient) Scan(cursor uint64, match string, count int64) ([]string, uint64, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	defer cancel()
+
+	keys, offset, err := rc.rdb.Scan(ctx, cursor, match, count).Result()
+	if err != nil {
+		return nil, 0, err
+	}
+
+	return keys, offset, nil
+}
+
+func (rc *RedisxClient) Incr(key string) error {
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	defer cancel()
+
+	_, err := rc.rdb.Incr(ctx, key).Result()
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (rc *RedisxClient) Decr(key string) error {
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	defer cancel()
+
+	_, err := rc.rdb.Decr(ctx, key).Result()
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
