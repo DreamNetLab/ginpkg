@@ -1,4 +1,4 @@
-module github.com/LanceWzt/ginpkg
+module github.com/DreamNetLab/ginpkg
 
 go 1.20
 
