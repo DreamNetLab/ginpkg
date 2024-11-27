@@ -11,18 +11,20 @@ import (
 
 var sugarLogger *zap.SugaredLogger
 
-func Setup(logPath string, level int) {
+type LogxLvl string
+
+func Setup(logPath string, level LogxLvl) {
 	var logLevel zapcore.Level
 	switch level {
-	case 0:
+	case "debug":
 		logLevel = zapcore.DebugLevel
-	case 1:
+	case "info":
 		logLevel = zapcore.InfoLevel
-	case 2:
+	case "warn":
 		logLevel = zapcore.WarnLevel
-	case 3:
+	case "error":
 		logLevel = zapcore.ErrorLevel
-	case 4:
+	case "fatal":
 		logLevel = zapcore.FatalLevel
 	default:
 		logLevel = zapcore.ErrorLevel
