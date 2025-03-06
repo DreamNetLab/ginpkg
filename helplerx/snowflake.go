@@ -2,13 +2,26 @@ package helplerx
 
 import (
 	"github.com/bwmarrin/snowflake"
+	"sync"
 )
 
-func GenerateSnowFlakeID(nodeID int64) (int64, error) {
-	node, err := snowflake.NewNode(nodeID)
+type SnowflakeClient struct {
+	Node *snowflake.Node
+	mu   sync.Mutex
+}
+
+func NewSnowflakeClient(nodeID int64) (*SnowflakeClient, error) {
+	client, err := snowflake.NewNode(nodeID)
 	if err != nil {
-		return 0, err
+		return nil, err
 	}
 
-	return node.Generate().Int64(), nil
+	return &SnowflakeClient{Node: client}, nil
+}
+
+func (sc *SnowflakeClient) GenerateSnowFlakeID() int64 {
+	sc.mu.Lock()
+	defer sc.mu.Unlock()
+
+	return sc.Node.Generate().Int64()
 }
